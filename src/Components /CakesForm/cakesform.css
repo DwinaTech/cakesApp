@@ -1,0 +1,32 @@
+.form{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    width: 30em;
+    margin: auto
+}
+
+.form input,
+.form textarea{
+    padding: .5em;
+    border-radius: .4em;
+    border: 1px solid gray;
+}
+
+.form button{
+    background: blue;
+    border: 1px solid blue;
+    border-radius: .4em;
+    padding: .2em 0;
+    font-size: 1.2em;
+    color: #fff;
+    cursor: pointer;
+    outline: none
+}
+
+.form .cancel{
+    background: rgb(161, 33, 33);
+    border-color: rgb(161, 33, 33);
+    cursor: pointer;
+    outline: none
+}

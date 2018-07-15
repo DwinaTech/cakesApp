@@ -1,0 +1,42 @@
+.cake-list{
+    max-width: 75em;
+    margin: auto;
+}
+
+.select-cake{
+    background: #2eaf73;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    border-color: #2eaf73;
+    margin-right: .5em;
+    outline: none;
+    border-radius: .3em;
+    padding: .35em 1em;
+    width: 7em;
+}
+
+.cake-list .content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 1em;
+}
+
+.cke-list h1{
+    margin: 0;
+}
+
+.cakes-number{
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+.cakes-number label{
+    margin-right: .5em
+}
+
+@media (max-width: 767px){
+    .cake-list .content{
+        grid-template-columns: 1fr;
+    }
+}

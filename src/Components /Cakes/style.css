@@ -1,0 +1,104 @@
+.edit,
+.delete,
+.add-cake,
+.single-cake{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.edit .content,
+.delete .content{
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+}
+
+
+.single-cake .content{
+    width: 50em;
+    background: #bbb;
+    border-radius: .5em;
+    padding: 0 1em 2em 1em;
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+}
+
+.add-button,
+.edit-button,
+.delete-button,
+.read-more{
+    background: #2e2eaf;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    border-color: #2e2eaf;
+    border-radius: .3em;
+    outline: none;
+    padding: .35em 1em;
+    width: 7em;
+}
+
+.read-more{
+    width: 8em;
+    margin-right: .5em;
+    margin-top: 1em
+}
+
+.delete-button{
+    background: rgb(165, 43, 43);
+    border-color: rgb(165, 43, 43);
+    margin-left: .5em;
+    margin-top: 1em
+}
+
+.edit h1,
+.add-cake h1{
+    color: #fff
+}
+
+.delete .content{
+    background: #bbb;
+    padding: 1em;
+    border-radius: .5em;
+}
+
+.delete .content h1{
+    color: yellow
+}
+
+.delete .content .buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10em;
+}
+
+.delete .content .buttons .deleteButton{
+    background: rgb(165, 43, 43);
+    border-color: rgb(165, 43, 43);
+    padding: .5em 1.5em;
+    border-radius: .4em;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+}
+
+.delete .content .buttons .cancelButton{
+    background: rgb(0, 128, 0);
+    border-color: rgb(0, 128, 0);
+    padding: .5em 1.5em;
+    border-radius: .4em;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none
+}
