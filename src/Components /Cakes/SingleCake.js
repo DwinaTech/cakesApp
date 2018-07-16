@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
@@ -28,7 +28,7 @@ class SingleCake extends Component {
                     <div className="content">
                         <h1>{this.props.cake.name}</h1>
                         <label>
-                            {this.props.cake.yumFactor}
+                            Cake number {this.props.cake.yumFactor} cakes
                         </label>
                         <br/>
                         <img src='http://placehold.it/300x200' alt='img' /><br/>
