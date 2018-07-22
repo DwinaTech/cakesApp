@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LIST_OF_CAKES, FAVORITE_CAKES } from './type';
 
-const api = 'http://localhost:3001/api';	
+const api = process.env.REACT_APP_API || 'http://localhost:3001/api';	
 
 export function getListOfCakes() {
     return async dispatch => {
