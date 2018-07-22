@@ -60,6 +60,7 @@
     background: #bbb;
     padding: 1em;
     border-radius: .5em;
+    max-width: 40em;
 }
 
 .delete .content h1{
