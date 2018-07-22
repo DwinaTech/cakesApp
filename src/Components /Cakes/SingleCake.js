@@ -31,7 +31,7 @@ class SingleCake extends Component {
                             Cake number {this.props.cake.yumFactor} cakes
                         </label>
                         <br/>
-                        <img src='http://placehold.it/300x200' alt='img' /><br/>
+                        <img src={`${this.props.cake.imageUrl}`} alt='img' /><br/>
                         <p>{this.props.cake.comment}</p>
                         <button onClick={this.handleClose} className="select-cake" type="submit" >Close</button>
                     </div>

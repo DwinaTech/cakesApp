@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CakesForm } from '../CakesForm';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editCake } from '../../actions';
@@ -11,16 +12,16 @@ class EditCake extends Component {
         name: '',
         yumFactor: null,
         imgUrl: '',
-        comment: '',
-        openEdit: false
+        comment: ''
     }
 
     componentDidMount(){
+        const { data } = this.props.match.params;
         this.setState({
-            name: this.props.name,
-            imageUrl: this.props.imageUrl,
-            yumFactor: this.props.yumFactor,
-            comment: this.props.comment
+            name: data.name,
+            imageUrl: data.imageUrl,
+            yumFactor: data.yumFactor,
+            comment: data.comment
         })
     }
 
@@ -33,23 +34,13 @@ class EditCake extends Component {
 
     handleSubmitChange = () => {
         const { cakeId } = this.props;
-        this.props.editCake(this.state, cakeId);
-        this.context.router.history.push('/')
-    }
-
-    showComponent = () => {
-        this.setState({
-            openEdit: true
+        this.props.editCake(this.state, cakeId)
+        .then(() => {
+            this.context.router.history.push('/')
         })
     }
 
-    handleCancel = () => {
-        this.setState({
-            openEdit: false
-        })
-    }
-
-    renderEditComponent = () => {
+    render() {
         return (
             <div className="edit">
                 <div className="content">
@@ -61,21 +52,11 @@ class EditCake extends Component {
                         imageUrl={this.state.imageUrl}
                         yumFactor={this.state.yumFactor}
                         comment={this.state.comment}
-                        edit={this.state.openEdit}
                         buttonText='Update'
                     />
                 </div>
             </div>
         )
-    }
-
-    render() {
-        if (this.state.openEdit) {
-            return this.renderEditComponent()
-        }
-        return (
-            <button className="edit-button" onClick={this.showComponent} type="text" >Edit</button>
-        );
     }
 }
 
@@ -87,9 +68,4 @@ EditCake.contextTypes = {
     router: PropTypes.object.isRequired
   };
 
-function mapStateToProp({savedCake}) {    
-    return {
-        savedCake
-    }
-}
-export default connect(mapStateToProp, { editCake })(EditCake);
+export default connect(null, { editCake })(withRouter(props => <EditCake {...props} />));

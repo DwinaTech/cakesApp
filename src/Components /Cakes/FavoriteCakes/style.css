@@ -1,62 +1,22 @@
-.edit,
-.delete,
-.add-cake,
-.single-cake{
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-.edit .content,
-.delete .content{
-    grid-template-columns: 1fr !important;
-    justify-items: center;
-}
-
-
-.single-cake .content{
-    width: 50em;
-    background: #bbb;
-    border-radius: .5em;
-    padding: 0 1em 2em 1em;
-    grid-template-columns: 1fr !important;
-    justify-items: center;
-}
-
-.add-button,
-.edit-button,
-.delete-button,
-.read-more{
-    background: #2e2eaf;
+.delete-button{
+    background: rgb(165, 43, 43);
+    border-color: rgb(165, 43, 43);
+    border-radius: .3em;
     color: #fff;
     font-size: 1em;
     cursor: pointer;
-    border-color: #2e2eaf;
-    border-radius: .3em;
     outline: none;
     padding: .35em 1em;
     width: 7em;
-}
-
-.read-more{
-    width: 8em;
-    margin-right: .5em;
-    margin-top: 1em
-}
-
-.edit h1,
-.add-cake h1{
-    color: #fff
+    margin-left: .5em;
+    margin-top: 1em;
+    text-decoration: navajowhite;
+    display: inline-block
 }
 
 .delete .content{
+    grid-template-columns: 1fr !important;
+    justify-items: center;
     background: #bbb;
     padding: 1em;
     border-radius: .5em;
@@ -93,6 +53,5 @@
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
-    outline: none;
-    width: 100%;
+    outline: none
 }

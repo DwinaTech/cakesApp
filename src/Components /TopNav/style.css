@@ -1,0 +1,16 @@
+.top-nav{
+    background: #333;
+    padding: 1em;
+}
+
+.top-nav a{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 1em;
+}
+
+.top-nav .active{
+    background: #fff;
+    color: #333;
+    padding: 1em;
+}
