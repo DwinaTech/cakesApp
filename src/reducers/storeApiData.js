@@ -1,4 +1,4 @@
-import { LIST_OF_CAKES } from '../actions/type';
+import { LIST_OF_CAKES, FAVORITE_CAKES } from '../actions/type';
 
 export function listOfCakes(state= [], action = {}) {
     switch(action.type){
@@ -8,5 +8,16 @@ export function listOfCakes(state= [], action = {}) {
         };
         default:
         return state;
+    }
+}
+
+export function favoriteCakes(state = [], action = {}) {
+    switch (action.type) {
+        case FAVORITE_CAKES:
+            return {
+                favoriteCakes: action.favoriteCakes
+            }
+        default:
+            return state;
     }
 }
