@@ -1,72 +1,88 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getFavoriteCakes } from '../../../actions';
-import DeleteCake from '../DeleteCake';
-//import './favoriteCake.css';
+import { addFavoritecake, getFavoriteCakes } from '../../../actions';
 import SingleCake from '../SingleCake';
+import TopNav from '../../TopNav';
+import './style.css';
 
 class FavoriteCakes extends Component {
 
     state = {
-        yumFactor: 1,
-        user: 'customer'
+        user: 'customer',
+        error: ''
     }
-    async componentDidMount(){
+    componentDidMount(){
         this.props.getFavoriteCakes();
     }
 
-    handleSelectCakeNumber = (e) => {
-        this.setState({ yumFactor: e.target.value })
+    handleSubmit = () => {
+        const { name, imageUrl, comment, yumFactor } = this.props;
+        this.props.addFavoritecake({ name, imageUrl, comment, yumFactor })
+        .then(cake => {
+            if (cake) {
+                this.context.router.history.push('/favoritecakes');
+            }else{
+                this.setState({ error: 'There is an error occurred'})
+            }
+        })
     }
 
     handleUserType = (e) => {
         this.setState({ user: e.target.value })
     }
 
-    render() {   
+    showFavoriteCakesComponent = () => {
         const cakes = this.props.favoriteCakes.favoriteCakes ? this.props.favoriteCakes.favoriteCakes.data : [];
         return (
-        <div className="cake-list">
-            <h1>Cakes list</h1>
+            <div className="cake-list">
+            <TopNav />
+            <h1>Favorite Cakes List</h1>
             <div className="content">
                 {
                     cakes.map(cake => (
                         <div key={cake._id} className="cake-card">
-                        {console.log(cake)
-                        }
                             <h1>{cake.name}</h1>
-                            {cake.yumFactor ? <label>Number of selected cakes { cake.yumFactor }</label>: null}
+                            <h2>Cake number: {cake.yumFactor} cakes</h2>
                             <img src={`${cake.imageUrl}`} alt='img' /><br/>
                             <Fragment>
                                 <SingleCake cake={cake} />
-                                <DeleteCake cakeId={cake._id} />
+                                <Link className="delete-button" to={`/favoritecakes/delete/${cake._id}`}>Delete</Link>
                             </Fragment>
                         </div>
                     ))
                 }
             </div>
         </div>
+        )
+    }
+
+    render() {   
+        const { pathname } = this.props.location;
+        if (pathname === '/favoritecakes') {
+            return this.showFavoriteCakesComponent()
+        }
+        return (
+            <button onClick={this.handleSubmit} className="select-cake" type="submit" >Select</button>
         );
     }
 }
 
 FavoriteCakes.propTypes = {
-    getFavoriteCakes: PropTypes.func.isRequired
+    favoriteCakes: PropTypes.object.isRequired,
+    addFavoritecake: PropTypes.func.isRequired,
+    getFavoriteCakes: PropTypes.func.isRequired, 
 }
-
-const dispatchToProps = dispatch => {
-    return {
-        getFavoriteCakes: () => {
-        return dispatch(getFavoriteCakes())
-      }
-    }
-  }
   
+FavoriteCakes.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 function mapStateToProp({favoriteCakes}) {    
     return {
         favoriteCakes
     }
 }
-export default connect(mapStateToProp, dispatchToProps)(FavoriteCakes);
+
+export default connect(mapStateToProp, { addFavoritecake, getFavoriteCakes })(withRouter(props => <FavoriteCakes {...props} />));

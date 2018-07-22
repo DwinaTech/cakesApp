@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getListOfCakes } from '../../actions';
-import EditCake from '../Cakes/EditCake';
-import DeleteCake from '../Cakes/DeleteCake';
 import AddCake from '../Cakes/AddCake';
 import './home.css';
 import SingleCake from '../Cakes/SingleCake';
+import FavoriteCakes from '../Cakes/FavoriteCakes'
+import TopNav from '../TopNav';
 
 class Home extends Component {
 
@@ -27,10 +28,12 @@ class Home extends Component {
     }
 
     render() {   
+        const { yumFactor } =  this.state;
         const { user } = this.state;
         const cakes = this.props.listOfCakes.listOfCakes ? this.props.listOfCakes.listOfCakes.data : [];
         return (
         <div className="cake-list">
+        <TopNav />
             <h1>Cakes list</h1>
             <div className="cakes-number">
                 <label>Select user type</label>
@@ -60,23 +63,21 @@ class Home extends Component {
                                 ): null
                             }
                             {cake.yumFactor ? <label>Number of selected cakes { cake.yumFactor }</label>: null}
-                            <img src={`${cake.imageUrl}`} alt='img' /><br/>
+                            <img src={`${cake.imageUrl}`} alt='img' /> <br/>
                             {
                                 user === 'admin' ? (
                                     <Fragment>
                                         <SingleCake cake={cake} />
-                                        <EditCake {...cake} cakeId={cake._id} /><br/>
-                                        <DeleteCake cakeId={cake._id} />
+                                        <Link className="edit-button" to={`/cakes/edit/${{...cake}}`} >Edit</Link><br />
+                                        <Link className="delete-button" to={`/cakes/delete/${cake._id}`} >Delete</Link>
                                     </Fragment>
                                 ):(
                                     <Fragment>
                                         <SingleCake cake={cake} />
-                                        <button className="select-cake" type="submit" >Select</button><br/>
+                                         <FavoriteCakes yumFactor={yumFactor} {...cake}/>
                                     </Fragment>
                                 )
-                            }
-                            
-                            
+                            } 
                         </div>
                     ))
                 }
@@ -104,4 +105,4 @@ function mapStateToProp({listOfCakes}) {
         listOfCakes
     }
 }
-export default connect(mapStateToProp, dispatchToProps)(Home);
+export default connect(mapStateToProp, dispatchToProps)(withRouter(props => <Home {...props} />));

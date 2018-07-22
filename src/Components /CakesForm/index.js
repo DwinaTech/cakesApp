@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import './cakesform.css'
 
 export function CakesForm(props) {    
@@ -11,9 +13,17 @@ export function CakesForm(props) {
                 <textarea value={props.comment} onChange={ props.handleCakeChange } placeholder="image description"  rows="4" name="comment" />
                 <Fragment>
                     <button onClick={ props.handleSubmitChange } type="submit">{props.buttonText}</button>
-                    <button className="cancel" onClick={ props.handleCancel } type="submit">Cancel</button>
+                    <Link to="/"><button className="cancel" type="submit">Cancel</button></Link>
                 </Fragment>
             </div>
         </div>
     )
+}
+
+CakesForm.propTypes = {
+    handleCakeChange: PropTypes.func,
+    handleSubmitChange: PropTypes.func,
+    name: PropTypes.string,
+    imageUrl: PropTypes.string,
+    comment: PropTypes.string,
 }

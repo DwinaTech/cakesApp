@@ -28,5 +28,6 @@
     background: rgb(161, 33, 33);
     border-color: rgb(161, 33, 33);
     cursor: pointer;
-    outline: none
+    outline: none;
+    width: 100%;
 }

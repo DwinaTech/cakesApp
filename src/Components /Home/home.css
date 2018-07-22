@@ -35,6 +35,29 @@
     margin-right: .5em
 }
 
+.add-button,
+.edit-button,
+.delete-button{
+    background: #2e2eaf;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    border-color: #2e2eaf;
+    border-radius: .3em;
+    outline: none;
+    padding: .35em 1em;
+    width: 7em;
+    display: inline-block;
+    text-decoration: navajowhite;
+}
+
+.delete-button{
+    background: rgb(165, 43, 43);
+    border-color: rgb(165, 43, 43);
+    margin-left: .5em;
+    margin-top: 1em;
+}
+
 @media (max-width: 767px){
     .cake-list .content{
         grid-template-columns: 1fr;
