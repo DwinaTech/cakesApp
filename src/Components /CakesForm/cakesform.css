@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1em;
-    width: 30em;
+    max-width: 30em;
     margin: auto
 }
 
@@ -30,4 +30,14 @@
     cursor: pointer;
     outline: none;
     width: 100%;
+}
+
+@media (max-width: 592px){
+    .content{
+        width: 100%;
+        padding: 1em;
+    }
+    .form{
+        max-width: 50em;
+    }
 }
