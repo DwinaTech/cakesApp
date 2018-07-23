@@ -20,6 +20,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 1em;
+    grid-gap: 1em;
+    max-width: 900px;
+    margin: auto;
+}
+
+.cake-list .content img{
+    width: 100%;
+    height: 20em;
 }
 
 .cke-list h1{
@@ -61,5 +69,6 @@
 @media (max-width: 767px){
     .cake-list .content{
         grid-template-columns: 1fr;
+        margin: 1.5em;
     }
 }
