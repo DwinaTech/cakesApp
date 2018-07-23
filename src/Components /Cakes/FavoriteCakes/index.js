@@ -72,7 +72,6 @@ class FavoriteCakes extends Component {
 }
 
 FavoriteCakes.propTypes = {
-    favoriteCakes: PropTypes.object.isRequired,
     addFavoritecake: PropTypes.func.isRequired,
     getFavoriteCakes: PropTypes.func.isRequired, 
 }

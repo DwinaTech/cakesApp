@@ -8,6 +8,7 @@ import './home.css';
 import SingleCake from '../Cakes/SingleCake';
 import FavoriteCakes from '../Cakes/FavoriteCakes'
 import TopNav from '../TopNav';
+import EditCake from '../Cakes/EditCake';
 
 class Home extends Component {
 
@@ -68,7 +69,7 @@ class Home extends Component {
                                 user === 'admin' ? (
                                     <Fragment>
                                         <SingleCake cake={cake} />
-                                        <Link className="edit-button" to={`/cakes/edit/${{...cake}}`} >Edit</Link><br />
+                                        <EditCake data={cake} /><br />
                                         <Link className="delete-button" to={`/cakes/delete/${cake._id}`} >Delete</Link>
                                     </Fragment>
                                 ):(

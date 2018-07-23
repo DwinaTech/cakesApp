@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { CakesForm } from '../CakesForm';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,22 +7,16 @@ import { editCake } from '../../actions';
 import './style.css'
 
 class EditCake extends Component {
-
-    state = {
-        name: '',
-        yumFactor: null,
-        imgUrl: '',
-        comment: ''
-    }
-
-    componentDidMount(){
-        const { data } = this.props.match.params;
-        this.setState({
-            name: data.name,
-            imageUrl: data.imageUrl,
-            yumFactor: data.yumFactor,
-            comment: data.comment
-        })
+    constructor(props){
+        super(props);
+        this.state = {
+            name: props.data.name,
+            imageUrl: props.data.imageUrl,
+            yumFactor: props.data.yumFactor,
+            comment: props.data.comment,
+            cakeId: props.data._id,
+            open: false
+        }
     }
 
     handleCakeChange = (e) => {    
@@ -33,29 +27,45 @@ class EditCake extends Component {
     }
 
     handleSubmitChange = () => {
-        const { cakeId } = this.props;
+        const { cakeId } = this.state;
         this.props.editCake(this.state, cakeId)
         .then(() => {
+            this.context.router.history.push('/favoritecakes')
             this.context.router.history.push('/')
         })
     }
 
+    handleOpen = () => {
+        this.setState({ open: true })
+    }
+
+    handleCancel = () => {
+        this.setState({ open: false })
+    }
+
     render() {
         return (
-            <div className="edit">
-                <div className="content">
-                    <CakesForm 
-                        handleSubmitChange={this.handleSubmitChange}
-                        handleCakeChange={this.handleCakeChange}
-                        handleCancel={this.handleCancel}
-                        name={this.state.name}
-                        imageUrl={this.state.imageUrl}
-                        yumFactor={this.state.yumFactor}
-                        comment={this.state.comment}
-                        buttonText='Update'
-                    />
-                </div>
-            </div>
+            <Fragment>
+                {
+                    this.state.open ? 
+                    <div className="edit">
+                        <div className="content">
+                            <CakesForm 
+                                edit
+                                handleSubmitChange={this.handleSubmitChange}
+                                handleCakeChange={this.handleCakeChange}
+                                handleCancel={this.handleCancel}
+                                name={this.state.name}
+                                imageUrl={this.state.imageUrl}
+                                yumFactor={this.state.yumFactor}
+                                comment={this.state.comment}
+                                buttonText='Update'
+                            />
+                        </div>
+                    </div> : 
+                    <button className="edit-button" onClick={this.handleOpen}>Edit</button>
+                }
+            </Fragment>
         )
     }
 }

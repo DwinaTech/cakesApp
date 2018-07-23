@@ -13,7 +13,12 @@ export function CakesForm(props) {
                 <textarea value={props.comment} onChange={ props.handleCakeChange } placeholder="image description"  rows="4" name="comment" />
                 <Fragment>
                     <button onClick={ props.handleSubmitChange } type="submit">{props.buttonText}</button>
-                    <Link to="/"><button className="cancel" type="submit">Cancel</button></Link>
+                    {
+                        props.edit ? 
+                        <button onClick={props.handleCancel} className="cancel" type="submit">Cancel</button>
+                        :
+                        <Link to="/"><button className="cancel" type="submit">Cancel</button></Link>
+                    }
                 </Fragment>
             </div>
         </div>

@@ -97,3 +97,17 @@
     outline: none;
     width: 100%;
 }
+
+.edit-button{
+    background: #2e2eaf;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    border-color: #2e2eaf;
+    border-radius: .3em;
+    outline: none;
+    padding: .35em 1em;
+    width: 7em;
+    display: inline-block;
+    text-decoration: navajowhite;
+}
