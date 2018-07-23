@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { LIST_OF_CAKES, FAVORITE_CAKES } from './type';
 
-const api = process.env.REACT_APP_API || 'http://localhost:3001/api';	
+const envApi = process.env.REACT_APP_API.replace(/[%22]/g, '');
+const api = envApi || 'http://localhost:3001/api';	
 
 export function getListOfCakes() {
     return async dispatch => {
