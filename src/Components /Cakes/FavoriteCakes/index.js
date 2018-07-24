@@ -12,8 +12,7 @@ class FavoriteCakes extends Component {
 
     state = {
         user: 'customer',
-        error: '',
-        isLoading: false
+        error: ''
     }
     componentDidMount(){
         this.props.getFavoriteCakes();
@@ -21,10 +20,8 @@ class FavoriteCakes extends Component {
 
     handleSubmit = () => {
         const { name, imageUrl, comment, yumFactor } = this.props;
-        this.setState({ isLoading: true })
         this.props.addFavoritecake({ name, imageUrl, comment, yumFactor })
         .then(() => {
-            this.setState({ isLoading: false })
             this.context.router.history.push('/favoritecakes');
         })
     }
@@ -35,9 +32,6 @@ class FavoriteCakes extends Component {
 
     showFavoriteCakesComponent = () => {
         const cakes = this.props.favoriteCakes.favoriteCakes ? this.props.favoriteCakes.favoriteCakes.data : [];
-        if (cakes.length === 0) {
-            return <Spinner />
-        }
         return (
             <Fragment>
                 <TopNav />
@@ -66,8 +60,6 @@ class FavoriteCakes extends Component {
     }
 
     render() { 
-        console.log(this.props);
-         
         const { pathname } = this.props.location;
         if (pathname === '/favoritecakes') {
             return this.showFavoriteCakesComponent()
