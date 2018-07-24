@@ -14,6 +14,13 @@
 - Admin mode allow admin to add new cake, delete cake, edit cake and dispaly full details of the cake.
 - Customer mode allow her/him to browser list of cakes, display full details of the cake and select cake with specified number of the cake.
 - The app also includes favorite cakes list page which allow customer to add her/his favorite cakes with ability to delete them.
+
+## The technologies used:
+- HTML
+- CSS
+- React.js
+- API created with Node.js
+
 ## Home page screen shortcut:
 
 ### Select display mode:
