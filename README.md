@@ -18,7 +18,7 @@
 ## The technologies used:
 - HTML
 - CSS
-- React.js
+- React.js, Redux
 - API created with Node.js
 
 ## Home page screen shortcut:
