@@ -6,6 +6,7 @@ import './cakesform.css'
 export function CakesForm(props) {    
     return (
         <div className="content">
+            {props.error.length > 0 ? <h1 className="error-message">{props.error}</h1> : null}
             <div className="form">
                 <h1>{ props.edit ? 'Edit' : 'Add new'} cake</h1>
                 <input value={ props.name } onChange={ props.handleCakeChange } type="text" placeholder="Cake name" name="name" />

@@ -11,9 +11,22 @@ class AddCakes extends Component {
 
     state = {
         name: '',
-        imgUrl: '',
+        imageUrl: '',
         comment: '',
-        isLoading: false
+        isLoading: false,
+        error: ''
+    }
+
+    validation = () => {
+        let isError = false;
+        if (this.state.name.length === 0 || 
+            this.state.imageUrl.length === 0 ||
+            this.state.comment.length === 0
+        ) {
+            isError = true;
+            this.setState({ error: 'All fields are required'})
+        }
+        return isError;
     }
 
     handleCakeChange = (e) => {    
@@ -24,13 +37,15 @@ class AddCakes extends Component {
     }
 
     handleSubmitChange = () => {
-        this.setState({ isLoading: true })
-        this.props.addCake(this.state)
-        .then(() => {
-            this.context.router.history.push('/')
-            this.setState({ isLoading: false })
-        })
-        
+        const error = this.validation()
+        if (!error) {
+            this.setState({ isLoading: true })
+            this.props.addCake(this.state)
+            .then(() => {
+                this.context.router.history.push('/')
+                this.setState({ isLoading: false })
+            })
+        }
     }
 
     render() {
@@ -45,6 +60,7 @@ class AddCakes extends Component {
                         handleSubmitChange={this.handleSubmitChange}
                         handleCakeChange={this.handleCakeChange}
                         buttonText="Save"
+                        error={this.state.error}
                     />
                 </div>
             );

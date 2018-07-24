@@ -17,7 +17,8 @@ class EditCake extends Component {
             comment: props.data.comment,
             cakeId: props.data._id,
             open: false,
-            isLoading: false
+            isLoading: false,
+            error: ''
         }
     }
 
@@ -28,15 +29,30 @@ class EditCake extends Component {
         })
     }
 
+    validation = () => {
+        let isError = false;
+        if (this.state.name.length === 0 || 
+            this.state.imageUrl.length === 0 ||
+            this.state.comment.length === 0
+        ) {
+            isError = true;
+            this.setState({ error: 'All fields are required'})
+        }
+        return isError;
+    }
+
     handleSubmitChange = () => {
+        const error = this.validation()
         const { cakeId } = this.state;
-        this.setState({ isLoading: true })
-        this.props.editCake(this.state, cakeId)
-        .then(() => {
-            this.context.router.history.push('/favoritecakes')
-            this.context.router.history.push('/')
-            this.setState({ isLoading: false })
-        })
+        if (!error) {
+            this.setState({ isLoading: true })
+            this.props.editCake(this.state, cakeId)
+            .then(() => {
+                this.context.router.history.push('/favoritecakes')
+                this.context.router.history.push('/')
+                this.setState({ isLoading: false })
+            })
+        }
     }
 
     handleOpen = () => {
@@ -67,6 +83,7 @@ class EditCake extends Component {
                                 yumFactor={this.state.yumFactor}
                                 comment={this.state.comment}
                                 buttonText='Update'
+                                error={this.state.error}
                             />
                         </div>
                     </div> : 

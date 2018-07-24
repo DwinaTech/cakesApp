@@ -37,6 +37,12 @@
     width: 100%;
 }
 
+.error-message{
+    font-size: 1.8em;
+    font-style: italic;
+    color: #ebff00 !important;
+}
+
 @media (max-width: 592px){
     .content{
         width: 100%;
