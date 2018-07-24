@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { addFavoritecake, getFavoriteCakes } from '../../../actions';
 import SingleCake from '../SingleCake';
 import TopNav from '../../TopNav';
-import Spinner from '../../Spinner';
 import './style.css';
 
 class FavoriteCakes extends Component {
@@ -18,12 +17,14 @@ class FavoriteCakes extends Component {
         this.props.getFavoriteCakes();
     }
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
         const { name, imageUrl, comment, yumFactor } = this.props;
-        this.props.addFavoritecake({ name, imageUrl, comment, yumFactor })
-        .then(() => {
+        const response = await this.props.addFavoritecake({ name, imageUrl, comment, yumFactor })
+        if (response.success) {
             this.context.router.history.push('/favoritecakes');
-        })
+        }else{
+            this.setState({ error: response.message })
+        }
     }
 
     handleUserType = (e) => {

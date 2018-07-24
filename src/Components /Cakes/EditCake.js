@@ -41,17 +41,19 @@ class EditCake extends Component {
         return isError;
     }
 
-    handleSubmitChange = () => {
+    handleSubmitChange = async () => {
         const error = this.validation()
         const { cakeId } = this.state;
         if (!error) {
             this.setState({ isLoading: true })
-            this.props.editCake(this.state, cakeId)
-            .then(() => {
+            const response = await this.props.editCake(this.state, cakeId);
+            if (response.success) {
+                this.setState({ isLoading: false })
                 this.context.router.history.push('/favoritecakes')
                 this.context.router.history.push('/')
-                this.setState({ isLoading: false })
-            })
+            }else{
+                this.setState({ error: response.message, isLoading: false })
+            }
         }
     }
 

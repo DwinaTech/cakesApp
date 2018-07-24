@@ -12,27 +12,32 @@ class DeleteCake extends Component {
         this.state ={
             cakeId: props.match.params.cakeId,
             favoriteCakeId: props.match.params.favoriteCakeId,
-            isLoading: false
+            isLoading: false,
+            error: ''
         }
     }
 
-    handleDelete = () => {
+    handleDelete = async () => {
         const { cakeId } = this.state;
         const { favoriteCakeId } = this.state
         this.setState({ isLoading: true })
         if (favoriteCakeId) {
-            this.props.deleteFavoriteCake(favoriteCakeId)
-            .then(() => {
-                this.context.router.history.push('/favoritecakes');
+            const response = await this.props.deleteFavoriteCake(favoriteCakeId);
+            if (response.success) {
                 this.setState({ isLoading: false })
-            })
+                this.context.router.history.push('/favoritecakes');
+            }else{
+                this.setState({ error: response.message })
+            }
         }
         if (cakeId) {
-            this.props.deleteCake(cakeId)
-            .then(() => {
-                this.context.router.history.push('/');
+            const response = await this.props.deleteCake(cakeId);
+            if (response.success) {
                 this.setState({ isLoading: false })
-            })
+                this.context.router.history.push('/');
+            }else{
+                this.setState({ error: response.message, isLoading: false })
+            }
         }
     }
 

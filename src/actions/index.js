@@ -15,22 +15,22 @@ export function getListOfCakes() {
                 listOfCakes
             });
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
 
 export function addCake(data) {
-    return async dispatch => {
+    return async () => {
         try {
             const response = await axios.post(`${api}/cakes`, data);
-            const savedCake = response.data;
-            dispatch({
-                type: LIST_OF_CAKES,
-                savedCake
-            });
+            return response.data;
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
@@ -42,7 +42,9 @@ export function editCake(data, cakeId) {
             const response = await axios.put(`${api}/cakes/${cakeId}`, data);
             return response.data;
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
@@ -53,7 +55,9 @@ export function deleteCake(cakeId) {
             const response = await axios.delete(`${api}/cakes/${cakeId}`);
             return response.data;
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
@@ -68,7 +72,9 @@ export function getFavoriteCakes() {
                 favoriteCakes
             });
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
@@ -79,7 +85,9 @@ export function addFavoritecake(data) {
             const response = await axios.post(`${api}/favoritecakes`, data);
             return response.data;
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }
@@ -90,7 +98,9 @@ export function deleteFavoriteCake(cakeId) {
             const response = await axios.delete(`${api}/favoritecakes/${cakeId}`);
             return response.data;
         } catch (error) {  
-            return JSON.stringify(error)
+            let errMessage = JSON.stringify(error);
+            errMessage = JSON.parse(errMessage).response.data;
+            return errMessage
         }
     }
 }

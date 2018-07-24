@@ -36,15 +36,17 @@ class AddCakes extends Component {
         })
     }
 
-    handleSubmitChange = () => {
+    handleSubmitChange = async () => {
         const error = this.validation()
         if (!error) {
             this.setState({ isLoading: true })
-            this.props.addCake(this.state)
-            .then(() => {
-                this.context.router.history.push('/')
+            const response = await this.props.addCake(this.state);
+            if (response.success) {
                 this.setState({ isLoading: false })
-            })
+                this.context.router.history.push('/')
+            }else{
+                this.setState({ error: response.message, isLoading: false })
+            }
         }
     }
 
