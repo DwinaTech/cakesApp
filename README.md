@@ -43,3 +43,13 @@
 
 ### Full cake details screen:
 <img width="1440" alt="screen shot 2018-07-24 at 11 38 21" src="https://user-images.githubusercontent.com/26422326/43136175-c6e78392-8f3f-11e8-8f69-577de6763f2a.png">
+
+## Mobile device screen:
+### Main page
+![cakes](https://user-images.githubusercontent.com/26422326/43139282-3eed017e-8f49-11e8-8e4d-c0379df20e9d.png)
+
+### Fvorite cakes page:
+![cakes-app herokuapp com_](https://user-images.githubusercontent.com/26422326/43139307-4f526900-8f49-11e8-856a-1881bc37c496.png)
+
+
+
