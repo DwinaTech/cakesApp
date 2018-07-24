@@ -33,57 +33,59 @@ class Home extends Component {
         const { user } = this.state;
         const cakes = this.props.listOfCakes.listOfCakes ? this.props.listOfCakes.listOfCakes.data : [];
         return (
-        <div className="cake-list">
-        <TopNav />
-            <h1>Cakes list</h1>
-            <div className="cakes-number">
-                <label>Select user type</label>
-                <select onChange={this.handleUserType} name="user" >
-                    <option value="customer">Customer</option>
-                    <option value="admin">Admin</option>
-                </select>
+        <Fragment>
+            <TopNav />
+            <div className="cake-list">
+                <h1>Cakes list</h1>
+                <div className="cakes-number">
+                    <label>Select user type</label>
+                    <select onChange={this.handleUserType} name="user" >
+                        <option value="customer">Customer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                { user === 'admin' ? <AddCake /> : null }
+                <div className="content">
+                    {
+                        cakes.map(cake => (
+                            <div key={cake._id} className="cake-card">
+                                <h1>{cake.name}</h1>
+                                { user !== 'admin' ?
+                                    (
+                                        <div className="cakes-number">
+                                            <label>Select number of cakes</label>
+                                            <select onChange={this.handleSelectCakeNumber}>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                                <option value="4">Four</option>
+                                                <option value="5">Five</option>
+                                            </select>
+                                        </div>
+                                    ): null
+                                }
+                                {cake.yumFactor ? <label>Number of selected cakes { cake.yumFactor }</label>: null}
+                                <img src={`${cake.imageUrl}`} alt='img' /> <br/>
+                                {
+                                    user === 'admin' ? (
+                                        <Fragment>
+                                            <SingleCake cake={cake} />
+                                            <EditCake data={cake} /><br />
+                                            <Link className="delete-button" to={`/cakes/delete/${cake._id}`} >Delete</Link>
+                                        </Fragment>
+                                    ):(
+                                        <Fragment>
+                                            <SingleCake cake={cake} />
+                                            <FavoriteCakes yumFactor={yumFactor} {...cake}/>
+                                        </Fragment>
+                                    )
+                                } 
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
-            { user === 'admin' ? <AddCake /> : null }
-            <div className="content">
-                {
-                    cakes.map(cake => (
-                        <div key={cake._id} className="cake-card">
-                            <h1>{cake.name}</h1>
-                            { user !== 'admin' ?
-                                (
-                                    <div className="cakes-number">
-                                        <label>Select number of cakes</label>
-                                        <select onChange={this.handleSelectCakeNumber}>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="4">Four</option>
-                                            <option value="5">Five</option>
-                                        </select>
-                                    </div>
-                                ): null
-                            }
-                            {cake.yumFactor ? <label>Number of selected cakes { cake.yumFactor }</label>: null}
-                            <img src={`${cake.imageUrl}`} alt='img' /> <br/>
-                            {
-                                user === 'admin' ? (
-                                    <Fragment>
-                                        <SingleCake cake={cake} />
-                                        <EditCake data={cake} /><br />
-                                        <Link className="delete-button" to={`/cakes/delete/${cake._id}`} >Delete</Link>
-                                    </Fragment>
-                                ):(
-                                    <Fragment>
-                                        <SingleCake cake={cake} />
-                                         <FavoriteCakes yumFactor={yumFactor} {...cake}/>
-                                    </Fragment>
-                                )
-                            } 
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
+        </Fragment>
         );
     }
 }

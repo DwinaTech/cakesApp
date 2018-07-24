@@ -36,27 +36,29 @@ class FavoriteCakes extends Component {
     showFavoriteCakesComponent = () => {
         const cakes = this.props.favoriteCakes.favoriteCakes ? this.props.favoriteCakes.favoriteCakes.data : [];
         return (
-            <div className="cake-list">
-            <TopNav />
-            <h1>Favorite Cakes List</h1>
-            <div className="content">
-                {
-                    cakes.length > 0 ?
-                    cakes.map(cake => (
-                        <div key={cake._id} className="cake-card">
-                            <h1>{cake.name}</h1>
-                            <h2>Cake number: {cake.yumFactor} cakes</h2>
-                            <img src={`${cake.imageUrl}`} alt='img' /><br/>
-                            <Fragment>
-                                <SingleCake cake={cake} />
-                                <Link className="delete-button" to={`/favoritecakes/delete/${cake._id}`}>Delete</Link>
-                            </Fragment>
-                        </div>
-                    )) :
-                    <h1>To add cakes to this list select from home page</h1>
-                }
-            </div>
-        </div>
+            <Fragment>
+                <TopNav />
+                <div className="cake-list">
+                    <h1>Favorite Cakes List</h1>
+                    <div className="content">
+                        {
+                            cakes.length > 0 ?
+                            cakes.map(cake => (
+                                <div key={cake._id} className="cake-card">
+                                    <h1>{cake.name}</h1>
+                                    <h2>Cake number: {cake.yumFactor} cakes</h2>
+                                    <img src={`${cake.imageUrl}`} alt='img' /><br/>
+                                    <Fragment>
+                                        <SingleCake cake={cake} />
+                                        <Link className="delete-button" to={`/favoritecakes/delete/${cake._id}`}>Delete</Link>
+                                    </Fragment>
+                                </div>
+                            )) :
+                            <h1>To add cakes to this list select from home page</h1>
+                        }
+                    </div>
+                </div>
+            </Fragment>
         )
     }
 

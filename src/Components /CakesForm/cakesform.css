@@ -40,7 +40,7 @@
 @media (max-width: 592px){
     .content{
         width: 100%;
-        padding: 1em;
+        margin: 1em
     }
     .form{
         max-width: 50em;
