@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editCake } from '../../actions';
 import './style.css'
+import Spinner from '../Spinner';
 
 class EditCake extends Component {
     constructor(props){
@@ -15,7 +16,8 @@ class EditCake extends Component {
             yumFactor: props.data.yumFactor,
             comment: props.data.comment,
             cakeId: props.data._id,
-            open: false
+            open: false,
+            isLoading: false
         }
     }
 
@@ -28,10 +30,12 @@ class EditCake extends Component {
 
     handleSubmitChange = () => {
         const { cakeId } = this.state;
+        this.setState({ isLoading: true })
         this.props.editCake(this.state, cakeId)
         .then(() => {
             this.context.router.history.push('/favoritecakes')
             this.context.router.history.push('/')
+            this.setState({ isLoading: false })
         })
     }
 
@@ -44,6 +48,9 @@ class EditCake extends Component {
     }
 
     render() {
+        if (this.state.isLoading) {
+            return <Spinner />
+        }
         return (
             <Fragment>
                 {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { deleteCake, deleteFavoriteCake } from '../../actions/index'
+import Spinner from '../Spinner';
 import './style.css';
 
 class DeleteCake extends Component {
@@ -11,28 +12,34 @@ class DeleteCake extends Component {
         this.state ={
             cakeId: props.match.params.cakeId,
             favoriteCakeId: props.match.params.favoriteCakeId,
-            error: ''
+            isLoading: false
         }
     }
 
     handleDelete = () => {
         const { cakeId } = this.state;
         const { favoriteCakeId } = this.state
+        this.setState({ isLoading: true })
         if (favoriteCakeId) {
             this.props.deleteFavoriteCake(favoriteCakeId)
             .then(() => {
                 this.context.router.history.push('/favoritecakes');
+                this.setState({ isLoading: false })
             })
         }
         if (cakeId) {
             this.props.deleteCake(cakeId)
             .then(() => {
                 this.context.router.history.push('/');
+                this.setState({ isLoading: false })
             })
         }
     }
 
     render() {
+        if (this.state.isLoading) {
+            return <Spinner />
+        }
         return (
             <div className="delete">
                 <div className="content">

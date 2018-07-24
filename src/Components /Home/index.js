@@ -9,12 +9,14 @@ import SingleCake from '../Cakes/SingleCake';
 import FavoriteCakes from '../Cakes/FavoriteCakes'
 import TopNav from '../TopNav';
 import EditCake from '../Cakes/EditCake';
+import Spinner from '../Spinner';
 
 class Home extends Component {
 
     state = {
         yumFactor: 1,
-        user: 'customer'
+        user: 'customer',
+        isLoading: false
     }
     async componentDidMount(){
         this.props.getListOfCakes();
@@ -28,10 +30,17 @@ class Home extends Component {
         this.setState({ user: e.target.value })
     }
 
+    showSpinner = () => {
+        this.setState({ isLoading: true })
+    }
+
     render() {   
         const { yumFactor } =  this.state;
         const { user } = this.state;
         const cakes = this.props.listOfCakes.listOfCakes ? this.props.listOfCakes.listOfCakes.data : [];
+        if (cakes.length === 0 || this.state.isLoading) {
+            return <Spinner />
+        }
         return (
         <Fragment>
             <TopNav />
@@ -76,7 +85,7 @@ class Home extends Component {
                                     ):(
                                         <Fragment>
                                             <SingleCake cake={cake} />
-                                            <FavoriteCakes yumFactor={yumFactor} {...cake}/>
+                                            <FavoriteCakes yumFactor={yumFactor} showSpinner={this.showSpinner} {...cake}/>
                                         </Fragment>
                                     )
                                 } 

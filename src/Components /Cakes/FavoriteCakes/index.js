@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { addFavoritecake, getFavoriteCakes } from '../../../actions';
 import SingleCake from '../SingleCake';
 import TopNav from '../../TopNav';
+import Spinner from '../../Spinner';
 import './style.css';
 
 class FavoriteCakes extends Component {
 
     state = {
         user: 'customer',
-        error: ''
+        error: '',
+        isLoading: false
     }
     componentDidMount(){
         this.props.getFavoriteCakes();
@@ -19,13 +21,11 @@ class FavoriteCakes extends Component {
 
     handleSubmit = () => {
         const { name, imageUrl, comment, yumFactor } = this.props;
+        this.setState({ isLoading: true })
         this.props.addFavoritecake({ name, imageUrl, comment, yumFactor })
-        .then(cake => {
-            if (cake) {
-                this.context.router.history.push('/favoritecakes');
-            }else{
-                this.setState({ error: 'There is an error occurred'})
-            }
+        .then(() => {
+            this.setState({ isLoading: false })
+            this.context.router.history.push('/favoritecakes');
         })
     }
 
@@ -35,6 +35,9 @@ class FavoriteCakes extends Component {
 
     showFavoriteCakesComponent = () => {
         const cakes = this.props.favoriteCakes.favoriteCakes ? this.props.favoriteCakes.favoriteCakes.data : [];
+        if (cakes.length === 0) {
+            return <Spinner />
+        }
         return (
             <Fragment>
                 <TopNav />
@@ -62,13 +65,15 @@ class FavoriteCakes extends Component {
         )
     }
 
-    render() {   
+    render() { 
+        console.log(this.props);
+         
         const { pathname } = this.props.location;
         if (pathname === '/favoritecakes') {
             return this.showFavoriteCakesComponent()
         }
         return (
-            <button onClick={this.handleSubmit} className="select-cake" type="submit" >Select</button>
+            <button onClick={() => {this.props.showSpinner(); this.handleSubmit()}} className="select-cake" type="submit" >Select</button>
         );
     }
 }
