@@ -18,7 +18,7 @@
 ## The technologies used:
 - HTML
 - CSS
-- React.js
+- React.js, Redux
 - API created with Node.js
 
 ## Home page screen shortcut:
@@ -46,10 +46,13 @@
 
 ## Mobile device screen:
 ### Main page
-![cakes](https://user-images.githubusercontent.com/26422326/43139282-3eed017e-8f49-11e8-8e4d-c0379df20e9d.png)
+
+<img width="519" alt="screen shot 2018-07-24 at 23 05 59" src="https://user-images.githubusercontent.com/26422326/43168749-4b347988-8f96-11e8-99b4-bd426a0fec55.png">
 
 ### Fvorite cakes page:
-![cakes-app herokuapp com_](https://user-images.githubusercontent.com/26422326/43139307-4f526900-8f49-11e8-856a-1881bc37c496.png)
+
+<img width="518" alt="screen shot 2018-07-24 at 23 06 15" src="https://user-images.githubusercontent.com/26422326/43168775-5f50e550-8f96-11e8-982e-fc70dec81563.png">
+
 
 
 
