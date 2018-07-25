@@ -47,7 +47,7 @@ class FavoriteCakes extends Component {
                                     <h2>Cake number: {cake.yumFactor} cakes</h2>
                                     <img src={`${cake.imageUrl}`} alt='img' /><br/>
                                     <Fragment>
-                                        <SingleCake cake={cake} />
+                                        <SingleCake cake={cake} favoriteCakes/>
                                         <Link className="delete-button" to={`/favoritecakes/delete/${cake._id}`}>Delete</Link>
                                     </Fragment>
                                 </div>

@@ -27,9 +27,12 @@ class SingleCake extends Component {
                 <div className="single-cake">
                     <div className="content">
                         <h1>{this.props.cake.name}</h1>
-                        <label>
-                            Cake number {this.props.cake.yumFactor} cakes
-                        </label>
+                        {
+                            this.props.favoriteCakes ? <label>
+                                Cake number {this.props.cake.yumFactor} cakes
+                             </label> :
+                            null
+                        }
                         <br/>
                         <img src={`${this.props.cake.imageUrl}`} alt='img' /><br/>
                         <p>{this.props.cake.comment}</p>
