@@ -48,9 +48,9 @@ class DeleteCake extends Component {
         return (
             <div className="delete">
                 <div className="content">
-                    <h1>Are you sur want to delete this cake?</h1>
+                    <h1>Are you sure want to delete this cake?</h1>
                     <div className="buttons">
-                        <button className="deleteButton" onClick={ this.handleDelete } type="submit">Delete</button>
+                        <button className="deleteButton" onClick={ this.handleDelete } type="submit">Yes</button>
                         {
                             this.state.cakeId ?
                             <Link to="/"><button className="cancelButton" type="text">Cancel</button></Link>
