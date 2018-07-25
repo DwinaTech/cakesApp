@@ -107,8 +107,18 @@
         max-width: 100vw;
         max-height: 100vh;
         position: absolute;
-        grid-gap: .5em;
+        grid-gap: 0;
         top: 0;
         bottom: 0;
+    }
+
+    .single-cake .content h1{
+        margin: 0;
+        font-size: 1.4em;
+        font-style: italic;
+    }
+
+    .cake-list .content img{
+        height: 18em;
     }
 }
